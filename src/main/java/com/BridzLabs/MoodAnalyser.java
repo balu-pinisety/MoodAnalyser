@@ -28,6 +28,7 @@ public class MoodAnalyser {
 	 * @return HAPPY or SAD
 	 */
 	public String analyseMood() {
+		if (message==null) return null;
 		if (message.contains("Sad")) {
 			return "SAD";
 		} else {
