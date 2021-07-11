@@ -12,7 +12,7 @@ public class MoodAnalyserTest {
 
 	//Test case for Sad Mood
 	@Test
-	public void givenMessgae_WhenSad_ShouldReturn_Sad() {
+	public void givenMessgae_WhenSad_ShouldReturn_Sad() throws MoodAnalyserException {
 		MoodAnalyser moodAnalyser = new MoodAnalyser("I am in Sad Mood"); //passed message to constructor
 		String mood = moodAnalyser.analyseMood();
 		Assert.assertEquals("SAD", mood);
@@ -20,7 +20,7 @@ public class MoodAnalyserTest {
 	
 	//Test case for Happy Mood
 	@Test
-	public void givenMessage_whenNotSad_shouldReturn_Happy() {
+	public void givenMessage_whenNotSad_shouldReturn_Happy() throws MoodAnalyserException {
 		MoodAnalyser moodAnalyser = new MoodAnalyser("I am in any Mood"); //passed message to constructor
 		String mood = moodAnalyser.analyseMood();
 		Assert.assertEquals("HAPPY", mood);
@@ -28,9 +28,12 @@ public class MoodAnalyserTest {
 	
 	//Test case for Null
 	@Test
-	public void givenMessage_whenNull_shouldReturn_Null() {
-		MoodAnalyser moodAnalyser = new MoodAnalyser(); //passed message to constructor
-		String mood = moodAnalyser.analyseMood();
-		Assert.assertEquals("HAPPY", mood);
+	public void givenMessage_whenNull_shouldThrow_MoodAnalysisException() {
+		try {
+			MoodAnalyser moodAnalyser = new MoodAnalyser(null);
+			moodAnalyser.analyseMood();
+		} catch (MoodAnalyserException e) {
+			Assert.assertEquals("Invalid", e.getMessage());
+		}
 	}
 }
